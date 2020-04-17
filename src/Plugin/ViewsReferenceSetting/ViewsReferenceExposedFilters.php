@@ -5,7 +5,7 @@ namespace Drupal\viewsreference_filter\Plugin\ViewsReferenceSetting;
 use Drupal\Component\Plugin\PluginBase;
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\StringTranslation\StringTranslationTrait;;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\views\ViewExecutable;
 use Drupal\viewsreference\Plugin\ViewsReferenceSettingInterface;
 use Drupal\viewsreference_filter\ViewsRefFilterUtilityInterface;
@@ -61,7 +61,8 @@ class ViewsReferenceExposedFilters extends PluginBase implements ViewsReferenceS
    */
   public function alterFormField(&$form_field) {
 
-    $view = $this->viewsUtility->loadView($this->configuration['view_name'], $this->configuration['display_id']);
+    $view = $this->viewsUtility->loadView($this->configuration['view_name'],
+      $this->configuration['display_id']);
     if (!$view) {
       $form_field = [];
       return;
@@ -88,7 +89,6 @@ class ViewsReferenceExposedFilters extends PluginBase implements ViewsReferenceS
     $form_state->set('exposed', TRUE);
     // Go through each handler and let it generate its exposed widget.
     // @see ViewExposedForm::buildForm()
-
     foreach ($view->display_handler->handlers as $type => $value) {
       /** @var \Drupal\views\Plugin\views\ViewsHandlerInterface $handler */
       foreach ($view->$type as $id => $handler) {
@@ -100,7 +100,6 @@ class ViewsReferenceExposedFilters extends PluginBase implements ViewsReferenceS
               // Method buildExposedForm() gets rid of element titles, unless
               // type is 'checkbox'. So restore it if missing.
               if (empty($form_field[$info['value']]['#title'])) {
-                $form_field[$info['value']]['#title'] = $this->t('@label', ['@label' => $info['label']]);
                 $form_field[$info['value']]['#title'] = $this->t('@label', ['@label' => $info['label']]);
               }
 

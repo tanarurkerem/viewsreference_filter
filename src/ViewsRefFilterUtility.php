@@ -2,8 +2,6 @@
 
 namespace Drupal\viewsreference_filter;
 
-use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
-use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\views\ViewExecutableFactory;
 use Psr\Log\LoggerInterface;
@@ -62,10 +60,7 @@ class ViewsRefFilterUtility implements ViewsRefFilterUtilityInterface {
           $view->setDisplay($display_id);
           $view->initHandlers();
         }
-        catch (InvalidPluginDefinitionException $e) {
-          $message = "Exception:" . $e;
-        }
-        catch (PluginNotFoundException $e) {
+        catch (\Exception $e) {
           $message = "Exception:" . $e;
         }
       }
