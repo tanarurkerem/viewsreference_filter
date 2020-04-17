@@ -1,0 +1,8 @@
+name: 'Views Reference Field Filter'
+type: module
+description: 'Expose filters for editors to configure referenced views'
+core: 8.x
+package: 'Views'
+dependencies:
+  module:
+    - viewsreference
