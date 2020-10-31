@@ -7,7 +7,7 @@ use Drupal\views\ViewExecutableFactory;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class ViewsRefFilterUtility.
+ * The Views Reference Filter Utility Class.
  */
 class ViewsRefFilterUtility implements ViewsRefFilterUtilityInterface {
 
@@ -42,10 +42,7 @@ class ViewsRefFilterUtility implements ViewsRefFilterUtilityInterface {
   }
 
   /**
-   * @param $view_name
-   * @param $display_id
-   *
-   * @return \Drupal\Core\Entity\EntityInterface|mixed|null
+   * {@inheritdoc}
    */
   public function loadView($view_name, $display_id) {
     static $view;
