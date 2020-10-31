@@ -34,6 +34,10 @@ class ViewsRefFilterUtility implements ViewsRefFilterUtilityInterface {
 
   /**
    * Constructs a new ViewsRefFilterUtility object.
+   *
+   * @param \Psr\Log\LoggerInterface $logger
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   * @param \Drupal\views\ViewExecutableFactory $viewsExecutableFactory
    */
   public function __construct(LoggerInterface $logger, EntityTypeManagerInterface $entity_type_manager, ViewExecutableFactory $viewsExecutableFactory) {
     $this->logger = $logger;

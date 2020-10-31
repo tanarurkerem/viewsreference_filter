@@ -3,11 +3,12 @@
 namespace Drupal\viewsreference_filter\Plugin\ViewsReferenceSetting;
 
 use Drupal\Component\Plugin\PluginBase;
+use Drupal\Core\Annotation\Translation;
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\views\ViewExecutable;
-use Drupal\viewsreference\Plugin\ViewsReferenceSettingInterface;
+use Drupal\viewsreference\Annotation\ViewsReferenceSetting;
 use Drupal\viewsreference_filter\ViewsRefFilterUtilityInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -99,7 +100,7 @@ class ViewsReferenceExposedFilters extends PluginBase implements ContainerFactor
     // @see ViewExposedForm::buildForm()
     foreach ($view->display_handler->handlers as $type => $value) {
       /** @var \Drupal\views\Plugin\views\HandlerBase $handler */
-      foreach ($view->$type as $id => $handler) {
+      foreach ($view->$type as $handler) {
         if ($handler->canExpose() && $handler->isExposed()) {
           $handler->buildExposedForm($form_field, $form_state);
 
