@@ -11,6 +11,7 @@ use Drupal\views\ViewExecutable;
 use Drupal\viewsreference\Annotation\ViewsReferenceSetting;
 use Drupal\viewsreference_filter\ViewsRefFilterUtilityInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\viewsreference\Plugin\ViewsReferenceSettingInterface;
 
 /**
  * The views reference setting plugin for exposed filters, for editors.
@@ -21,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   default_value = "",
  * )
  */
-class ViewsReferenceExposedFilters extends PluginBase implements ContainerFactoryPluginInterface {
+class ViewsReferenceExposedFilters extends PluginBase implements ViewsReferenceSettingInterface, ContainerFactoryPluginInterface {
 
   use StringTranslationTrait;
 
