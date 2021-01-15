@@ -82,6 +82,11 @@ class ViewsReferenceExposedFilters extends PluginBase implements ViewsReferenceS
     unset($form_field['#default_value']);
     $form_field['#type'] = 'container';
     $form_field['#tree'] = TRUE;
+    $form_field['vr_exposed_filters_visible'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Show exposed filters'),
+      '#default_value' => (isset($current_values['vr_exposed_filters_visible']) && $current_values['vr_exposed_filters_visible']),
+    ];
 
     // Some plugin may look into current exposed input to change some behaviour,
     // i.e. setting a default value (see SHS for an example). So set current
@@ -129,7 +134,15 @@ class ViewsReferenceExposedFilters extends PluginBase implements ViewsReferenceS
   /**
    * {@inheritdoc}
    */
-  public function alterView(ViewExecutable $view, $values) {
+  public function alterView(ViewExecutable $view, $values)
+  {
+    // Get exposed filter visibility, and remove configuration.
+    $vrExposedFiltersVisible = FALSE;
+    if (isset($values['vr_exposed_filters_visible'])) {
+      $vrExposedFiltersVisible = $values['vr_exposed_filters_visible'];
+      unset($values['vr_exposed_filters_visible']);
+    }
+
     if (!empty($values) && is_array($values)) {
       $view_filters = $view->display_handler->getOption('filters');
       $filters = [];
@@ -142,8 +155,13 @@ class ViewsReferenceExposedFilters extends PluginBase implements ViewsReferenceS
         $view->setExposedInput($filters);
       }
     }
-    // Force exposed filters form to not display when rendering the view.
-    $view->display_handler->setOption('exposed_block', TRUE);
+
+    if (!$vrExposedFiltersVisible) {
+      // Force exposed filters form to not display when rendering the view.
+      $view->display_handler->setOption('exposed_block', TRUE);
+    } else {
+      $view->display_handler->setOption('exposed_block', FALSE);
+    }
   }
 
 }
