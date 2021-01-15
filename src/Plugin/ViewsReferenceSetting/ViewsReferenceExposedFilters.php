@@ -146,8 +146,14 @@ class ViewsReferenceExposedFilters extends PluginBase implements ViewsReferenceS
     if (!empty($values) && is_array($values)) {
       $view_filters = $view->display_handler->getOption('filters');
       $filters = [];
+      $filters_by_id = [];
+      foreach ($view_filters as $key => $filter) {
+        if (isset($filter['expose']['identifier'])) {
+          $filters_by_id[$filter['expose']['identifier']] = $key;
+        }
+      }
       foreach ($values as $index => $value) {
-        if (!empty($value) && isset($view_filters[$index])) {
+        if (!empty($value) && isset($filters_by_id[$index])) {
           $filters[$index] = $value;
         }
       }
