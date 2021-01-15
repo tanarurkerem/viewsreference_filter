@@ -84,7 +84,7 @@ class ViewsReferenceExposedFilters extends PluginBase implements ViewsReferenceS
     $form_field['#tree'] = TRUE;
     $form_field['vr_exposed_filters_visible'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Show exposed filters'),
+      '#title' => $this->t('Show Filters on Page'),
       '#default_value' => (isset($current_values['vr_exposed_filters_visible']) && $current_values['vr_exposed_filters_visible']),
     ];
 
@@ -159,7 +159,8 @@ class ViewsReferenceExposedFilters extends PluginBase implements ViewsReferenceS
     if (!$vrExposedFiltersVisible) {
       // Force exposed filters form to not display when rendering the view.
       $view->display_handler->setOption('exposed_block', TRUE);
-    } else {
+    }
+    else {
       $view->display_handler->setOption('exposed_block', FALSE);
     }
   }
