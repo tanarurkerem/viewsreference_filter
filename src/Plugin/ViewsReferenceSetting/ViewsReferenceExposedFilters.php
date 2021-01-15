@@ -118,6 +118,10 @@ class ViewsReferenceExposedFilters extends PluginBase implements ViewsReferenceS
                 $form_field[$info['value']]['#title'] = $this->t('@label', ['@label' => $info['label']]);
               }
 
+              if (empty($form_field[$info['value']]['#description']) && !empty($info['description'])) {
+                $form_field[$info['value']]['#description'] = $info['description'];
+              }
+
               // Manually set default values, until we don't handle these
               // properly from form_state.
               // @todo: use (Sub)FormState to handle default_value.
