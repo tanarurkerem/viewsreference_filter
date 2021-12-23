@@ -1,5 +1,5 @@
 {
-    "name": "viewsreference_filter",
+    "name": "drupal/viewsreference_filter",
     "type": "drupal-module",
     "description": "Expose filters for editors to configure views",
     "keywords": [
